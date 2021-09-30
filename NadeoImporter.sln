@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NadeoImporter", "NadeoImporter.csproj", "{C8E2ADDE-3E02-4177-B149-D866472A2101}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Test|Any CPU = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8E2ADDE-3E02-4177-B149-D866472A2101}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{C8E2ADDE-3E02-4177-B149-D866472A2101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8E2ADDE-3E02-4177-B149-D866472A2101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8E2ADDE-3E02-4177-B149-D866472A2101}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{C8E2ADDE-3E02-4177-B149-D866472A2101}.Test|Any CPU.Build.0 = Test|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12B290EF-327F-41C3-A02F-4403BCF35EC2}
+	EndGlobalSection
+EndGlobal
