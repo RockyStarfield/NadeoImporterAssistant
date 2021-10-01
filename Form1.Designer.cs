@@ -105,7 +105,7 @@ namespace NadeoImporter
             this.tb2.Location = new System.Drawing.Point(97, 58);
             this.tb2.Name = "tb2";
             this.tb2.Size = new System.Drawing.Size(247, 23);
-            this.tb2.TabIndex = 1;
+            this.tb2.TabIndex = 3;
             this.tb2.TextChanged += new System.EventHandler(this.tb2_TextChanged);
             // 
             // tb1
@@ -115,6 +115,7 @@ namespace NadeoImporter
             this.tb1.ReadOnly = true;
             this.tb1.Size = new System.Drawing.Size(456, 23);
             this.tb1.TabIndex = 1;
+            this.tb1.TabStop = false;
             this.toolTip1.SetToolTip(this.tb1, "Root trackmania folder in Documents");
             // 
             // label2
@@ -122,9 +123,9 @@ namespace NadeoImporter
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(154, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "TM2020 folder (Documents)";
+            this.label2.Size = new System.Drawing.Size(173, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Trackmania folder (Documents)";
             // 
             // label3
             // 
@@ -141,7 +142,7 @@ namespace NadeoImporter
             this.label4.Location = new System.Drawing.Point(38, 291);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(111, 15);
-            this.label4.TabIndex = 2;
+            this.label4.TabIndex = 11;
             this.label4.Text = "Pivot Snap Distance";
             // 
             // tb3
@@ -151,7 +152,8 @@ namespace NadeoImporter
             this.tb3.Name = "tb3";
             this.tb3.ReadOnly = true;
             this.tb3.Size = new System.Drawing.Size(456, 23);
-            this.tb3.TabIndex = 6;
+            this.tb3.TabIndex = 0;
+            this.tb3.TabStop = false;
             this.toolTip1.SetToolTip(this.tb3, "Drag your file into this field or use \"Browse...\" button");
             this.tb3.DragDrop += new System.Windows.Forms.DragEventHandler(this.tb3_DragDrop);
             this.tb3.DragEnter += new System.Windows.Forms.DragEventHandler(this.tb3_DragEnter);
@@ -193,15 +195,14 @@ namespace NadeoImporter
             this.listBox1.Location = new System.Drawing.Point(12, 164);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(251, 199);
-            this.listBox1.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.listBox1, "Set up model materials using buttons on the right");
+            this.listBox1.TabIndex = 6;
             // 
             // b_folder
             // 
             this.b_folder.Location = new System.Drawing.Point(474, 27);
             this.b_folder.Name = "b_folder";
             this.b_folder.Size = new System.Drawing.Size(75, 23);
-            this.b_folder.TabIndex = 11;
+            this.b_folder.TabIndex = 2;
             this.b_folder.Text = "Browse...";
             this.b_folder.UseVisualStyleBackColor = true;
             this.b_folder.Click += new System.EventHandler(this.b_folder_Click);
@@ -211,7 +212,7 @@ namespace NadeoImporter
             this.b_fbx.Location = new System.Drawing.Point(474, 108);
             this.b_fbx.Name = "b_fbx";
             this.b_fbx.Size = new System.Drawing.Size(75, 23);
-            this.b_fbx.TabIndex = 12;
+            this.b_fbx.TabIndex = 1;
             this.b_fbx.Text = "Browse...";
             this.b_fbx.UseVisualStyleBackColor = true;
             this.b_fbx.Click += new System.EventHandler(this.b_fbx_Click);
@@ -223,7 +224,7 @@ namespace NadeoImporter
             this.rb_mesh.Location = new System.Drawing.Point(9, 47);
             this.rb_mesh.Name = "rb_mesh";
             this.rb_mesh.Size = new System.Drawing.Size(54, 19);
-            this.rb_mesh.TabIndex = 13;
+            this.rb_mesh.TabIndex = 11;
             this.rb_mesh.Text = "Mesh";
             this.rb_mesh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.rb_mesh, "Imports Mesh that can be imported as Crystal in meshmod");
@@ -238,7 +239,7 @@ namespace NadeoImporter
             this.rb_item.Location = new System.Drawing.Point(14, 22);
             this.rb_item.Name = "rb_item";
             this.rb_item.Size = new System.Drawing.Size(49, 19);
-            this.rb_item.TabIndex = 14;
+            this.rb_item.TabIndex = 10;
             this.rb_item.TabStop = true;
             this.rb_item.Text = "Item";
             this.toolTip1.SetToolTip(this.rb_item, "Imports as ready-to-use Item that will not be editable in meshmod");
@@ -269,10 +270,10 @@ namespace NadeoImporter
             this.groupBox1.Controls.Add(this.prop_fly_step);
             this.groupBox1.Controls.Add(this.prop_pivot);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(350, 146);
+            this.groupBox1.Location = new System.Drawing.Point(352, 146);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(199, 321);
-            this.groupBox1.TabIndex = 15;
+            this.groupBox1.Size = new System.Drawing.Size(197, 321);
+            this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Properties (optional)";
             // 
@@ -281,7 +282,7 @@ namespace NadeoImporter
             this.b_clear_prop.Location = new System.Drawing.Point(16, 203);
             this.b_clear_prop.Name = "b_clear_prop";
             this.b_clear_prop.Size = new System.Drawing.Size(53, 43);
-            this.b_clear_prop.TabIndex = 25;
+            this.b_clear_prop.TabIndex = 12;
             this.b_clear_prop.Text = "Clear";
             this.toolTip1.SetToolTip(this.b_clear_prop, "Clears all \"Item Properties\"");
             this.b_clear_prop.UseVisualStyleBackColor = true;
@@ -293,7 +294,7 @@ namespace NadeoImporter
             this.label12.Location = new System.Drawing.Point(111, 149);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(39, 15);
-            this.label12.TabIndex = 16;
+            this.label12.TabIndex = 20;
             this.label12.Text = "Offset";
             // 
             // label10
@@ -302,7 +303,7 @@ namespace NadeoImporter
             this.label10.Location = new System.Drawing.Point(111, 100);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(39, 15);
-            this.label10.TabIndex = 16;
+            this.label10.TabIndex = 20;
             this.label10.Text = "Offset";
             // 
             // label11
@@ -311,7 +312,7 @@ namespace NadeoImporter
             this.label11.Location = new System.Drawing.Point(34, 149);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(27, 15);
-            this.label11.TabIndex = 16;
+            this.label11.TabIndex = 20;
             this.label11.Text = "Size";
             // 
             // label7
@@ -320,7 +321,7 @@ namespace NadeoImporter
             this.label7.Location = new System.Drawing.Point(34, 100);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(27, 15);
-            this.label7.TabIndex = 16;
+            this.label7.TabIndex = 20;
             this.label7.Text = "Size";
             // 
             // label9
@@ -329,7 +330,7 @@ namespace NadeoImporter
             this.label9.Location = new System.Drawing.Point(111, 50);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 15);
-            this.label9.TabIndex = 16;
+            this.label9.TabIndex = 20;
             this.label9.Text = "Offset";
             // 
             // label14
@@ -356,7 +357,7 @@ namespace NadeoImporter
             this.label8.Location = new System.Drawing.Point(16, 50);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 15);
-            this.label8.TabIndex = 16;
+            this.label8.TabIndex = 20;
             this.label8.Text = "Fly Step";
             // 
             // prop_snap
@@ -364,7 +365,7 @@ namespace NadeoImporter
             this.prop_snap.Location = new System.Drawing.Point(155, 288);
             this.prop_snap.Name = "prop_snap";
             this.prop_snap.Size = new System.Drawing.Size(31, 23);
-            this.prop_snap.TabIndex = 21;
+            this.prop_snap.TabIndex = 11;
             this.prop_snap.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // prop_rot
@@ -374,7 +375,7 @@ namespace NadeoImporter
             this.prop_rot.Location = new System.Drawing.Point(86, 259);
             this.prop_rot.Name = "prop_rot";
             this.prop_rot.Size = new System.Drawing.Size(100, 19);
-            this.prop_rot.TabIndex = 20;
+            this.prop_rot.TabIndex = 10;
             this.prop_rot.Text = "Auto Rotation";
             this.prop_rot.UseVisualStyleBackColor = true;
             // 
@@ -385,7 +386,7 @@ namespace NadeoImporter
             this.prop_non.Location = new System.Drawing.Point(83, 234);
             this.prop_non.Name = "prop_non";
             this.prop_non.Size = new System.Drawing.Size(103, 19);
-            this.prop_non.TabIndex = 19;
+            this.prop_non.TabIndex = 9;
             this.prop_non.Text = "Not On Object";
             this.prop_non.UseVisualStyleBackColor = true;
             // 
@@ -396,7 +397,7 @@ namespace NadeoImporter
             this.prop_yaw.Location = new System.Drawing.Point(111, 209);
             this.prop_yaw.Name = "prop_yaw";
             this.prop_yaw.Size = new System.Drawing.Size(75, 19);
-            this.prop_yaw.TabIndex = 18;
+            this.prop_yaw.TabIndex = 8;
             this.prop_yaw.Text = "Yaw Only";
             this.prop_yaw.UseVisualStyleBackColor = true;
             // 
@@ -407,7 +408,7 @@ namespace NadeoImporter
             this.prop_ghost.Location = new System.Drawing.Point(95, 184);
             this.prop_ghost.Name = "prop_ghost";
             this.prop_ghost.Size = new System.Drawing.Size(91, 19);
-            this.prop_ghost.TabIndex = 17;
+            this.prop_ghost.TabIndex = 7;
             this.prop_ghost.Text = "Ghost Mode";
             this.prop_ghost.UseVisualStyleBackColor = true;
             // 
@@ -416,7 +417,7 @@ namespace NadeoImporter
             this.prop_vert_offset.Location = new System.Drawing.Point(155, 147);
             this.prop_vert_offset.Name = "prop_vert_offset";
             this.prop_vert_offset.Size = new System.Drawing.Size(31, 23);
-            this.prop_vert_offset.TabIndex = 16;
+            this.prop_vert_offset.TabIndex = 6;
             this.prop_vert_offset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // prop_vert_size
@@ -484,7 +485,7 @@ namespace NadeoImporter
             this.prop_author.Location = new System.Drawing.Point(97, 369);
             this.prop_author.Name = "prop_author";
             this.prop_author.Size = new System.Drawing.Size(152, 23);
-            this.prop_author.TabIndex = 17;
+            this.prop_author.TabIndex = 12;
             this.prop_author.TextChanged += new System.EventHandler(this.prop_author_TextChanged);
             // 
             // label15
@@ -503,16 +504,16 @@ namespace NadeoImporter
             this.groupBox2.Location = new System.Drawing.Point(271, 284);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(73, 79);
-            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Import As";
+            this.groupBox2.Text = "Import as";
             // 
             // prop_scale
             // 
             this.prop_scale.Location = new System.Drawing.Point(299, 369);
             this.prop_scale.Name = "prop_scale";
             this.prop_scale.Size = new System.Drawing.Size(45, 23);
-            this.prop_scale.TabIndex = 19;
+            this.prop_scale.TabIndex = 13;
             this.prop_scale.Text = "1";
             // 
             // label5
@@ -528,8 +529,8 @@ namespace NadeoImporter
             // 
             this.b_Import.Location = new System.Drawing.Point(12, 405);
             this.b_Import.Name = "b_Import";
-            this.b_Import.Size = new System.Drawing.Size(66, 54);
-            this.b_Import.TabIndex = 21;
+            this.b_Import.Size = new System.Drawing.Size(66, 61);
+            this.b_Import.TabIndex = 14;
             this.b_Import.Text = "Quick Import";
             this.toolTip1.SetToolTip(this.b_Import, "Creates all required files with your parameters and runs Importer ");
             this.b_Import.UseVisualStyleBackColor = true;
@@ -539,8 +540,8 @@ namespace NadeoImporter
             // 
             this.b_openitems.Location = new System.Drawing.Point(197, 405);
             this.b_openitems.Name = "b_openitems";
-            this.b_openitems.Size = new System.Drawing.Size(66, 54);
-            this.b_openitems.TabIndex = 22;
+            this.b_openitems.Size = new System.Drawing.Size(66, 61);
+            this.b_openitems.TabIndex = 17;
             this.b_openitems.Text = "Open Items Folder";
             this.toolTip1.SetToolTip(this.b_openitems, "Quick access to TM Item folder");
             this.b_openitems.UseVisualStyleBackColor = true;
@@ -550,21 +551,21 @@ namespace NadeoImporter
             // 
             this.b_save.Location = new System.Drawing.Point(269, 405);
             this.b_save.Name = "b_save";
-            this.b_save.Size = new System.Drawing.Size(75, 23);
-            this.b_save.TabIndex = 23;
-            this.b_save.Text = "Save";
-            this.toolTip1.SetToolTip(this.b_save, "Save current config as...");
+            this.b_save.Size = new System.Drawing.Size(76, 27);
+            this.b_save.TabIndex = 18;
+            this.b_save.Text = "Save Preset";
+            this.toolTip1.SetToolTip(this.b_save, "Save current Materials and Properties as...");
             this.b_save.UseVisualStyleBackColor = true;
             this.b_save.Click += new System.EventHandler(this.b_save_Click);
             // 
             // b_load
             // 
-            this.b_load.Location = new System.Drawing.Point(269, 436);
+            this.b_load.Location = new System.Drawing.Point(269, 439);
             this.b_load.Name = "b_load";
-            this.b_load.Size = new System.Drawing.Size(75, 23);
-            this.b_load.TabIndex = 24;
-            this.b_load.Text = "Load";
-            this.toolTip1.SetToolTip(this.b_load, "Load config from file");
+            this.b_load.Size = new System.Drawing.Size(76, 27);
+            this.b_load.TabIndex = 19;
+            this.b_load.Text = "Load Preset";
+            this.toolTip1.SetToolTip(this.b_load, "Load Materials and Properties from file");
             this.b_load.UseVisualStyleBackColor = true;
             this.b_load.Click += new System.EventHandler(this.b_load_Click);
             // 
@@ -572,8 +573,8 @@ namespace NadeoImporter
             // 
             this.b_filesonly.Location = new System.Drawing.Point(84, 405);
             this.b_filesonly.Name = "b_filesonly";
-            this.b_filesonly.Size = new System.Drawing.Size(107, 23);
-            this.b_filesonly.TabIndex = 26;
+            this.b_filesonly.Size = new System.Drawing.Size(107, 27);
+            this.b_filesonly.TabIndex = 15;
             this.b_filesonly.Text = "Prepare Only";
             this.toolTip1.SetToolTip(this.b_filesonly, "Sets up all files with your parameters without running Importer process");
             this.b_filesonly.UseVisualStyleBackColor = true;
@@ -581,10 +582,10 @@ namespace NadeoImporter
             // 
             // b_import_ready
             // 
-            this.b_import_ready.Location = new System.Drawing.Point(84, 436);
+            this.b_import_ready.Location = new System.Drawing.Point(84, 439);
             this.b_import_ready.Name = "b_import_ready";
-            this.b_import_ready.Size = new System.Drawing.Size(107, 23);
-            this.b_import_ready.TabIndex = 27;
+            this.b_import_ready.Size = new System.Drawing.Size(107, 27);
+            this.b_import_ready.TabIndex = 16;
             this.b_import_ready.Text = "Importer Only";
             this.toolTip1.SetToolTip(this.b_import_ready, "No XML file creation — basically an interface for Importer");
             this.b_import_ready.UseVisualStyleBackColor = true;
@@ -635,7 +636,7 @@ namespace NadeoImporter
             this.Icon = global::NadeoImporter.Properties.Resources.arrows;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Nadeo Importer Assistant (Eternal Alpha 0.2.1)";
+            this.Text = "Nadeo Importer Assistant";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

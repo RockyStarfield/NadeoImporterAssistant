@@ -46,7 +46,7 @@ namespace NadeoImporter
             this.comboBox1.Location = new System.Drawing.Point(203, 27);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(166, 23);
-            this.comboBox1.TabIndex = 0;
+            this.comboBox1.TabIndex = 2;
             // 
             // label1
             // 
@@ -71,7 +71,7 @@ namespace NadeoImporter
             this.tbMat.Location = new System.Drawing.Point(12, 27);
             this.tbMat.Name = "tbMat";
             this.tbMat.Size = new System.Drawing.Size(166, 23);
-            this.tbMat.TabIndex = 2;
+            this.tbMat.TabIndex = 1;
             // 
             // tbColor
             // 

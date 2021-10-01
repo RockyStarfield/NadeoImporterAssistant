@@ -27,6 +27,7 @@ namespace NadeoImporter
             tm_path = Properties.Settings.Default.TM_FOLDER;
             prop_author.Text = Properties.Settings.Default.AUTHOR;
             tb2.Text = Properties.Settings.Default.SUB_FOLD;
+            this.Text = this.Text + " (Eternal Alpha 0.2.2)";
 
             SetItemProps(Properties.Settings.Default.PROP_PIVOT,
                          Properties.Settings.Default.PROP_GHOST,
@@ -383,7 +384,7 @@ namespace NadeoImporter
         {
             using (var filediag = new OpenFileDialog())
             {
-                filediag.Filter = "Inporter Presets|*.preset";
+                filediag.Filter = "Importer Presets|*.preset";
                 DialogResult result = filediag.ShowDialog();
 
                 if (result == DialogResult.OK)

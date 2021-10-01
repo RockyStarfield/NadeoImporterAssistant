@@ -83,7 +83,9 @@ namespace NadeoImporter
                     {
                         preset.WriteLine(prop);
 
-                    }         
+                    }
+
+                    preset.Close();
 
 
                 }
@@ -107,6 +109,8 @@ namespace NadeoImporter
                     {
                         mats.Add(line.Split('\t'));               
                     }
+
+                    preset.Close();
 
                     return mats;
 
@@ -133,6 +137,8 @@ namespace NadeoImporter
                         props.Add(line);
                     }
 
+                    preset.Close();
+
                     return props;
 
                 }
@@ -154,7 +160,7 @@ namespace NadeoImporter
                     return;
 
                 case 3:
-                    MessageBox.Show(text, "Nadeo Importer Says", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(text, "Nadeo Importer Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
 
             } 
@@ -278,7 +284,7 @@ namespace NadeoImporter
         {
             if (!File.Exists(file))
             {
-                Throw("Couldn't find specified FBX filee", 1);
+                Throw("Couldn't find specified FBX file", 1);
                 return null;
             }
 
