@@ -120,7 +120,7 @@ namespace NadeoImporter
                 path = path + tb2.Text + "\\";
             }
 
-            string workfile = Program.CreateStructure(path, tb3.Text);
+            string workfile = Program.CreateStructure(tb1.Text, tb2.Text, tb3.Text);
 
             if (!(String.IsNullOrEmpty(workfile)))
             {

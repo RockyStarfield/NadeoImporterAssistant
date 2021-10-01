@@ -280,7 +280,7 @@ namespace NadeoImporter
             }
         }
 
-        public static string CreateStructure(string path, string file)
+        public static string CreateStructure(string tmfolder, string subfolder, string file)
         {
             if (!File.Exists(file))
             {
@@ -288,8 +288,15 @@ namespace NadeoImporter
                 return null;
             }
 
+            string path = tmfolder + "\\Work\\Items\\";
+            if (!string.IsNullOrEmpty(subfolder))
+            {
+                path = path + subfolder + "\\";
+            }
+
+            string name = Path.GetFileName(file);
             string destination = path + "Mesh\\";
-            string copy = destination + Path.GetFileName(file);
+            string copy = destination + name;
 
             if (!(Directory.Exists(destination))) {
                 Directory.CreateDirectory(destination);
@@ -297,7 +304,7 @@ namespace NadeoImporter
 
             if (File.Exists(copy))
             {
-                DialogResult result = MessageBox.Show("FBX file that you are trying to import already exists\n\nOverwrite?", "Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("\"" + name +"\" already exists in \\Work\\Items\\" + subfolder + "\nOverwrite?", "Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
@@ -306,10 +313,8 @@ namespace NadeoImporter
 
                     return copy;
                 } 
-                else
-                {
-                    return null;
-                }
+                else return null;
+
             } else
             {
                 File.Copy(file, copy);
