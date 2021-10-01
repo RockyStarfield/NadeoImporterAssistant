@@ -27,7 +27,7 @@ by Rocky ★
 	--- BASICS ---
 
 
-	-	"TM2020 folder"
+	-	"Trackmania folder"
 
 		Select your local Trackmania folder in "Documents" 
 		This field is saved between sessions, so you can forget about it 
@@ -144,13 +144,13 @@ by Rocky ★
 
 
 
-	--- Save ---
+	--- Save Preset ---
 
 		Saves current configuration of both Materials and Item Properties into a file 
 
 
 
-	--- Load ---
+	--- Load Preset ---
 		
 		Loads configuration from previously created .preset file
 
