@@ -82,7 +82,10 @@ namespace NadeoImporter
             this.b_filesonly = new System.Windows.Forms.Button();
             this.b_import_ready = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cb_clean = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.b_subfold = new System.Windows.Forms.Button();
+            this.Balloon = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -102,11 +105,10 @@ namespace NadeoImporter
             // 
             // tb2
             // 
-            this.tb2.Location = new System.Drawing.Point(97, 58);
+            this.tb2.Location = new System.Drawing.Point(64, 58);
             this.tb2.Name = "tb2";
-            this.tb2.Size = new System.Drawing.Size(247, 23);
+            this.tb2.Size = new System.Drawing.Size(282, 23);
             this.tb2.TabIndex = 3;
-            this.tb2.TextChanged += new System.EventHandler(this.tb2_TextChanged);
             // 
             // tb1
             // 
@@ -116,7 +118,7 @@ namespace NadeoImporter
             this.tb1.Size = new System.Drawing.Size(456, 23);
             this.tb1.TabIndex = 1;
             this.tb1.TabStop = false;
-            this.toolTip1.SetToolTip(this.tb1, "Root trackmania folder in Documents");
+            this.toolTip1.SetToolTip(this.tb1, "Trackmania folder in Documents");
             // 
             // label2
             // 
@@ -132,9 +134,9 @@ namespace NadeoImporter
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 61);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 15);
+            this.label3.Size = new System.Drawing.Size(46, 15);
             this.label3.TabIndex = 2;
-            this.label3.Text = "\\Work\\Items\\";
+            this.label3.Text = "\\Items\\";
             // 
             // label4
             // 
@@ -486,7 +488,6 @@ namespace NadeoImporter
             this.prop_author.Name = "prop_author";
             this.prop_author.Size = new System.Drawing.Size(152, 23);
             this.prop_author.TabIndex = 12;
-            this.prop_author.TextChanged += new System.EventHandler(this.prop_author_TextChanged);
             // 
             // label15
             // 
@@ -543,7 +544,7 @@ namespace NadeoImporter
             this.b_openitems.Size = new System.Drawing.Size(66, 61);
             this.b_openitems.TabIndex = 17;
             this.b_openitems.Text = "Open Items Folder";
-            this.toolTip1.SetToolTip(this.b_openitems, "Quick access to TM Item folder");
+            this.toolTip1.SetToolTip(this.b_openitems, "Quick access to \"Items\" folder");
             this.b_openitems.UseVisualStyleBackColor = true;
             this.b_openitems.Click += new System.EventHandler(this.b_openitems_Click);
             // 
@@ -591,20 +592,50 @@ namespace NadeoImporter
             this.b_import_ready.UseVisualStyleBackColor = true;
             this.b_import_ready.Click += new System.EventHandler(this.b_import_ready_Click);
             // 
+            // cb_clean
+            // 
+            this.cb_clean.AutoSize = true;
+            this.cb_clean.Checked = true;
+            this.cb_clean.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_clean.Location = new System.Drawing.Point(375, 89);
+            this.cb_clean.Name = "cb_clean";
+            this.cb_clean.Size = new System.Drawing.Size(95, 19);
+            this.cb_clean.TabIndex = 29;
+            this.cb_clean.Text = "Clean Import";
+            this.toolTip1.SetToolTip(this.cb_clean, "Don\'t leave any files in Work folder");
+            this.cb_clean.UseVisualStyleBackColor = true;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(350, 61);
+            this.label16.Location = new System.Drawing.Point(352, 62);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(118, 15);
             this.label16.TabIndex = 28;
             this.label16.Text = "Sub-folder (optional)";
+            // 
+            // b_subfold
+            // 
+            this.b_subfold.Location = new System.Drawing.Point(474, 58);
+            this.b_subfold.Name = "b_subfold";
+            this.b_subfold.Size = new System.Drawing.Size(75, 23);
+            this.b_subfold.TabIndex = 30;
+            this.b_subfold.Text = "Browse...";
+            this.b_subfold.UseVisualStyleBackColor = true;
+            this.b_subfold.Click += new System.EventHandler(this.b_subfold_Click);
+            // 
+            // Balloon
+            // 
+            this.Balloon.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.Balloon.ToolTipTitle = "Reminder";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(560, 477);
+            this.Controls.Add(this.b_subfold);
+            this.Controls.Add(this.cb_clean);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.b_import_ready);
             this.Controls.Add(this.b_filesonly);
@@ -637,6 +668,7 @@ namespace NadeoImporter
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Nadeo Importer Assistant";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -700,6 +732,9 @@ namespace NadeoImporter
         private System.Windows.Forms.Button b_import_ready;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox cb_clean;
+        private System.Windows.Forms.Button b_subfold;
+        private System.Windows.Forms.ToolTip Balloon;
     }
 }
 

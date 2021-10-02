@@ -12,9 +12,10 @@ namespace NadeoImporter
 {
     public partial class Form1 : Form
     {
-        private const string warning_FBX = "FBX file is not selected";
-        private const string warning_TM = "Trackmania folder is not specified";
-        string fbx_path, tm_path;
+        private const string warning_FBX = "Select FBX file to import";
+        private const string warning_TM = "Select your Trackmania folder";
+        private const string warning_MATS = "Set up Materials of your item";
+
         List<string[]> mat_list = new List<string[]>();
 
   
@@ -24,10 +25,11 @@ namespace NadeoImporter
             InitializeComponent();
 
             tb1.Text = Properties.Settings.Default.TM_FOLDER;
-            tm_path = Properties.Settings.Default.TM_FOLDER;
             prop_author.Text = Properties.Settings.Default.AUTHOR;
             tb2.Text = Properties.Settings.Default.SUB_FOLD;
-            this.Text = this.Text + " (Eternal Alpha 0.2.2)";
+            cb_clean.Checked = Properties.Settings.Default.CLEAN;
+
+            this.Text += " (Eternal Alpha 0.3)";
 
             SetItemProps(Properties.Settings.Default.PROP_PIVOT,
                          Properties.Settings.Default.PROP_GHOST,
@@ -42,20 +44,9 @@ namespace NadeoImporter
                          Properties.Settings.Default.PROP_VO,
                          Properties.Settings.Default.PROP_SNAP,
                          Properties.Settings.Default.PROP_SCALE);
-        }
-
-        public void SaveAuthor(string name)
-        {
-            Properties.Settings.Default.AUTHOR = name;
-            Properties.Settings.Default.Save();
 
         }
 
-        public void SaveLocation(string loc)
-        {
-            Properties.Settings.Default.SUB_FOLD = loc;
-            Properties.Settings.Default.Save();
-        }
 
         public void SetItemProps(bool pivot, bool ghost, bool yaw, bool non, bool rot, string fly_s, string fly_off, string h_s, string h_off, string v_s, string v_off, string snap, string scale)
         {
@@ -72,24 +63,6 @@ namespace NadeoImporter
             prop_vert_offset.Text = v_off;
             prop_snap.Text = snap;
             prop_scale.Text = scale;
-        }
-
-        public void SaveItemProps()
-        {
-            Properties.Settings.Default.PROP_PIVOT = prop_pivot.Checked;
-            Properties.Settings.Default.PROP_GHOST = prop_ghost.Checked;
-            Properties.Settings.Default.PROP_YAW = prop_yaw.Checked;
-            Properties.Settings.Default.PROP_NON = prop_non.Checked;
-            Properties.Settings.Default.PROP_ROT = prop_rot.Checked;
-            Properties.Settings.Default.PROP_FS = prop_fly_step.Text;
-            Properties.Settings.Default.PROP_FO = prop_fly_offset.Text;
-            Properties.Settings.Default.PROP_HS = prop_hor_size.Text;
-            Properties.Settings.Default.PROP_HO = prop_hor_offset.Text;
-            Properties.Settings.Default.PROP_VS = prop_vert_size.Text;
-            Properties.Settings.Default.PROP_VO = prop_vert_offset.Text;
-            Properties.Settings.Default.PROP_SNAP = prop_snap.Text;
-            Properties.Settings.Default.PROP_SCALE = prop_scale.Text;
-            Properties.Settings.Default.Save();
         }
 
         public void RedrawList()
@@ -110,21 +83,34 @@ namespace NadeoImporter
                 listBox1.Items.Add(entry);
             }
         }
+
+        public void ShowBalloon(string text, Control element)
+        {
+            Balloon.Show(text, element, 3000);
+        }
            
 
-        public string CreateXMLS(bool itemmode)
+        public string CreateXMLS(bool itemmode, bool ignore_warning)
         {
-            string path = tb1.Text + "\\Work\\Items\\";
-            if (tb2.Text != "")
-            {
-                path = path + tb2.Text + "\\";
-            }
+            string tm_path = tb1.Text;
+            string subfold = tb2.Text;
+            string fbx_path = tb3.Text;
+            string scale = prop_scale.Text;
 
-            string workfile = Program.CreateStructure(tb1.Text, tb2.Text, tb3.Text);
+
+            string workfile = Program.CreateStructure(tm_path, subfold, fbx_path, ignore_warning);
 
             if (!(String.IsNullOrEmpty(workfile)))
             {
-                Program.CreateMeshParams(path, tb3.Text, prop_scale.Text, mat_list);
+
+                string path = tm_path + "\\Work\\Items\\";
+
+                if (subfold != "")
+                {
+                    path = path + subfold + "\\";
+                }
+
+                Program.CreateMeshParams(path, fbx_path, scale, mat_list);
 
                 if (itemmode)
                 {
@@ -143,7 +129,7 @@ namespace NadeoImporter
                                                      prop_snap.Text,
                                                      prop_author.Text};
 
-                    Program.CreateItemParams(checkmarks, values, path, tb3.Text);
+                    Program.CreateItemParams(checkmarks, values, path, fbx_path);
                 }
                 return workfile;
             }
@@ -158,14 +144,49 @@ namespace NadeoImporter
 
                 if (result == DialogResult.OK)
                 {
-                    tm_path = folderdiag.SelectedPath;
                     tb1.Text = folderdiag.SelectedPath;
+                    Properties.Settings.Default.TM_FOLDER = folderdiag.SelectedPath;
+                    Properties.Settings.Default.Save();
                 }
             }
 
-            Properties.Settings.Default.TM_FOLDER = tm_path;
-            Properties.Settings.Default.Save();
+
         }
+
+        private void b_subfold_Click(object sender, EventArgs e)
+        {
+            string tm_path = tb1.Text;
+            string tm_itempath = tm_path + "\\Items\\";
+
+            using (var folderdiag = new FolderBrowserDialog())
+            {
+                folderdiag.SelectedPath = tm_itempath;
+                DialogResult result = folderdiag.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    string short_path = "";
+
+                    if (!folderdiag.SelectedPath.Contains(tm_path + "\\Items"))
+                    {
+                        Program.Throw("Sub-folder must be inside Trackmania\\Items folder", 1);
+                        return;
+                    }
+
+                    if (folderdiag.SelectedPath != (tm_path + "\\Items"))
+                    {
+                       short_path = (folderdiag.SelectedPath).Replace(tm_itempath, "");
+                    }
+
+                    tb2.Text = short_path;
+                    Properties.Settings.Default.SUB_FOLD = short_path;
+                    Properties.Settings.Default.Save();
+
+                }
+            }
+
+        }
+
 
         private void b_mat_add_Click(object sender, EventArgs e)
         {
@@ -231,12 +252,16 @@ namespace NadeoImporter
 
         private void b_import_ready_Click(object sender, EventArgs e)
         {
-            if (tb1.Text == "")
+
+            string tm_path = tb1.Text;
+
+            if (tm_path == "")
             {
-                Program.Throw(warning_TM, 1);
+                ShowBalloon(warning_TM, tb1);
                 return;
             }
-            using (Form3 importer = new Form3(tb1.Text))
+
+            using (Form3 importer = new Form3(tm_path))
             {
                 importer.StartPosition = FormStartPosition.CenterParent;
                 importer.ShowDialog();
@@ -253,8 +278,7 @@ namespace NadeoImporter
 
                 if (result == DialogResult.OK)
                 {
-                    fbx_path = filediag.FileName;
-                    tb3.Text = fbx_path;
+                    tb3.Text = filediag.FileName;
                 }
             }
 
@@ -275,34 +299,63 @@ namespace NadeoImporter
 
         private void b_Import_Click(object sender, EventArgs e)
         {
-            if (tb1.Text == "")
+
+            string tm_path = tb1.Text;
+            string subfold = tb2.Text;
+            string fbx_path = tb3.Text;
+            bool itemmode = rb_item.Checked;
+            bool clean = cb_clean.Checked;
+            bool ignore_warning = false;
+
+            if (tm_path == "")
             {
-                Program.Throw(warning_TM, 1);
+                ShowBalloon(warning_TM, tb1);
                 return;
             }
 
-            if (tb3.Text == "")
+            if (fbx_path == "")
             {
-                Program.Throw(warning_FBX, 1);
+                ShowBalloon(warning_FBX, tb3);
+                return;
+            }
+
+            if (mat_list.Count == 0)
+            {
+                ShowBalloon(warning_MATS, listBox1);
                 return;
             }
 
             if (prop_scale.Text == "")
             {
-                Program.Throw("Scale was not specified\n\nDefaulting to\"1\"", 1);
-                prop_scale.Text = "1";
+                 prop_scale.Text = "1";
             }
 
-            string  workfile = CreateXMLS(rb_item.Checked);
+            string gbxname = Program.ImportedAlreadyExists(tm_path, subfold, fbx_path, itemmode);
 
-            SaveItemProps();
-
-            if (!(string.IsNullOrEmpty(workfile)))
+            if (!string.IsNullOrEmpty(gbxname))
             {
-                Program.NadeoImporterRun(rb_item.Checked, Program.GetWorkFile(tb1.Text, workfile, rb_item.Checked), false);
+                DialogResult result = MessageBox.Show("\"" + gbxname + "\" already exists in Items\\" + subfold + "\nRunning Importer will overwrite that file. Continue?", "Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    ignore_warning = true;
+                }
+                else return;
             }
 
-           
+            string  workfile = CreateXMLS(itemmode, ignore_warning);
+
+
+
+            if (!string.IsNullOrEmpty(workfile))
+            {
+                Program.NadeoImporterRun(itemmode, Program.GetWorkFileShort(tm_path, workfile, itemmode), false);
+
+                if (clean)
+                {
+                    Program.CleanUp(workfile, tm_path);
+                }
+            }
         }
 
         private void tb3_DragDrop(object sender, DragEventArgs e)
@@ -315,10 +368,12 @@ namespace NadeoImporter
             }
         }
 
+
         private void tb3_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
+
 
         private void b_clear_prop_Click(object sender, EventArgs e)
         {
@@ -327,30 +382,27 @@ namespace NadeoImporter
 
         private void b_filesonly_Click(object sender, EventArgs e)
         {
-            if (tb1.Text == "")
+            string tm_path = tb1.Text;
+            string fbx_path = tb3.Text;
+            bool item_mode = rb_item.Checked;
+
+            if (tm_path == "")
             {
-                Program.Throw(warning_TM, 1);
+                ShowBalloon(warning_TM, tb1);
                 return;
             }
 
-            if (tb3.Text == "")
+            if (fbx_path == "")
             {
-                Program.Throw(warning_FBX, 1);
+                ShowBalloon(warning_FBX, tb3);
                 return;
             }
-            string workfile = CreateXMLS(rb_item.Checked);
-            Program.Throw("Copied FBX and created XMLs\n" + workfile.Replace(tb1.Text, "") + "\n\nIf you want to Import that Item later use \n\"Importer Only\" option", 2);
+
+            string workfile = CreateXMLS(item_mode, false);
+
+            Program.Throw("Copied FBX and created XMLs\n" + workfile.Replace(tm_path, "") + "\n\nIf you want to Import that Item later use \n\"Importer Only\" option", 2);
         }
 
-        private void prop_author_TextChanged(object sender, EventArgs e)
-        {
-            SaveAuthor(prop_author.Text);
-        }
-
-        private void tb2_TextChanged(object sender, EventArgs e)
-        {
-            SaveLocation(tb2.Text);
-        }
 
 
         private void b_save_Click(object sender, EventArgs e)
@@ -414,8 +466,30 @@ namespace NadeoImporter
         }
 
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           
+            Properties.Settings.Default.CLEAN = cb_clean.Checked;
+            Properties.Settings.Default.SUB_FOLD = tb2.Text;
 
-       
+            Properties.Settings.Default.AUTHOR = prop_author.Text;
 
+            Properties.Settings.Default.PROP_PIVOT = prop_pivot.Checked;
+            Properties.Settings.Default.PROP_GHOST = prop_ghost.Checked;
+            Properties.Settings.Default.PROP_YAW = prop_yaw.Checked;
+            Properties.Settings.Default.PROP_NON = prop_non.Checked;
+            Properties.Settings.Default.PROP_ROT = prop_rot.Checked;
+            Properties.Settings.Default.PROP_FS = prop_fly_step.Text;
+            Properties.Settings.Default.PROP_FO = prop_fly_offset.Text;
+            Properties.Settings.Default.PROP_HS = prop_hor_size.Text;
+            Properties.Settings.Default.PROP_HO = prop_hor_offset.Text;
+            Properties.Settings.Default.PROP_VS = prop_vert_size.Text;
+            Properties.Settings.Default.PROP_VO = prop_vert_offset.Text;
+            Properties.Settings.Default.PROP_SNAP = prop_snap.Text;
+            Properties.Settings.Default.PROP_SCALE = prop_scale.Text;
+
+            Properties.Settings.Default.Save();  
+
+        }
     }
 }

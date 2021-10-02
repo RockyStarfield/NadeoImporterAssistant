@@ -10,7 +10,7 @@ namespace NadeoImporter
 {
     public partial class Form3 : Form
     {
-        private string tm_path, item_path, fbx_path;
+        private string tm_path, item_path;
 
         public Form3(string path)
         {
@@ -33,8 +33,7 @@ namespace NadeoImporter
 
                 if (result == DialogResult.OK)
                 {
-                    fbx_path = filediag.FileName;
-                    tb.Text = fbx_path;
+                     tb.Text = filediag.FileName;
                 }
             }
         }
@@ -61,21 +60,24 @@ namespace NadeoImporter
 
         private void b_run_Click(object sender, EventArgs e)
         {
+            string fbxfile = tb.Text;
+            bool itemmode = rb_item.Checked;
+            bool log = cb_log.Checked;
 
-            if (tb.Text == "")
+            if (fbxfile == "")
             {
-                Program.Throw("No file selected", 1);
+                Balloon.Show("Select FBX file", tb, 3000);
                 return;
             }
 
-            if (!Program.FileExists(tb.Text))
+            if (!Program.FileExists(fbxfile))
             {
                 Program.Throw("Couldn't find specified FBX file", 1);
                 return;
             }
 
-            string workfile = Program.GetWorkFile(tm_path, tb.Text, rb_item.Checked);
-            Program.NadeoImporterRun(rb_item.Checked, workfile, cb_log.Checked);
+            string workfile = Program.GetWorkFileShort(tm_path, fbxfile, itemmode);
+            Program.NadeoImporterRun(itemmode, workfile, log);
         }
 
         private void tb3_DragEnter(object sender, DragEventArgs e)

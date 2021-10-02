@@ -29,7 +29,8 @@ namespace NadeoImporter
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.components = new System.ComponentModel.Container();
+            this.cb_link = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbMat = new System.Windows.Forms.TextBox();
@@ -38,15 +39,16 @@ namespace NadeoImporter
             this.button_add = new System.Windows.Forms.Button();
             this.button_cancel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.Balloon = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
-            // comboBox1
+            // cb_link
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(203, 27);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(166, 23);
-            this.comboBox1.TabIndex = 2;
+            this.cb_link.FormattingEnabled = true;
+            this.cb_link.Location = new System.Drawing.Point(200, 27);
+            this.cb_link.Name = "cb_link";
+            this.cb_link.Size = new System.Drawing.Size(228, 23);
+            this.cb_link.TabIndex = 2;
             // 
             // label1
             // 
@@ -75,15 +77,15 @@ namespace NadeoImporter
             // 
             // tbColor
             // 
-            this.tbColor.Location = new System.Drawing.Point(397, 27);
+            this.tbColor.Location = new System.Drawing.Point(450, 27);
             this.tbColor.Name = "tbColor";
-            this.tbColor.Size = new System.Drawing.Size(166, 23);
+            this.tbColor.Size = new System.Drawing.Size(113, 23);
             this.tbColor.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(397, 8);
+            this.label3.Location = new System.Drawing.Point(454, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 15);
             this.label3.TabIndex = 1;
@@ -112,11 +114,16 @@ namespace NadeoImporter
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label4.Location = new System.Drawing.Point(397, 53);
+            this.label4.Location = new System.Drawing.Point(454, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 15);
             this.label4.TabIndex = 6;
             this.label4.Text = "hex RGB or RRGGBB";
+            // 
+            // Balloon
+            // 
+            this.Balloon.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.Balloon.ToolTipTitle = "Reminder";
             // 
             // Form2
             // 
@@ -131,7 +138,7 @@ namespace NadeoImporter
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cb_link);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "Form2";
@@ -144,7 +151,7 @@ namespace NadeoImporter
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cb_link;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbMat;
@@ -153,5 +160,6 @@ namespace NadeoImporter
         private System.Windows.Forms.Button button_add;
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolTip Balloon;
     }
 }

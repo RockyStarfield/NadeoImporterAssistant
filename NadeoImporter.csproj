@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <AssemblyName>Importer Assist</AssemblyName>
+    <AssemblyName>ImporterAssist</AssemblyName>
     <RootNamespace>NadeoImporter</RootNamespace>
     <Configurations>Debug;Release;Test</Configurations>
     <PackageIcon>arrows.png</PackageIcon>
@@ -12,12 +12,14 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <ApplicationIcon>arrows.ico</ApplicationIcon>
     <Win32Resource />
-    <Version>0.2</Version>
+    <Version>0.3</Version>
     <Authors>Rocky Starfield</Authors>
     <Company>Shooting Star</Company>
     <Product>Nadeo Importer Assistant</Product>
-    <AssemblyVersion>0.2.2.0</AssemblyVersion>
-    <FileVersion>0.2.2.0</FileVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <FileVersion>0.3.0.0</FileVersion>
+    <SignAssembly>false</SignAssembly>
+    <PackageId>Importer Assist</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

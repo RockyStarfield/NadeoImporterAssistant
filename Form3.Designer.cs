@@ -29,6 +29,7 @@ namespace NadeoImporter
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.b_fbx = new System.Windows.Forms.Button();
             this.tb = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@ namespace NadeoImporter
             this.rb_mesh = new System.Windows.Forms.RadioButton();
             this.b_run = new System.Windows.Forms.Button();
             this.cb_log = new System.Windows.Forms.CheckBox();
+            this.Balloon = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +129,11 @@ namespace NadeoImporter
             this.cb_log.Text = "Log Mesh Stats";
             this.cb_log.UseVisualStyleBackColor = true;
             // 
+            // Balloon
+            // 
+            this.Balloon.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.Balloon.ToolTipTitle = "Reminder";
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -159,5 +166,6 @@ namespace NadeoImporter
         private System.Windows.Forms.RadioButton rb_mesh;
         private System.Windows.Forms.Button b_run;
         private System.Windows.Forms.CheckBox cb_log;
+        private System.Windows.Forms.ToolTip Balloon;
     }
 }

@@ -16,10 +16,6 @@ namespace NadeoImporter
 
     static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-
 
         [STAThread]
         static void Main()
@@ -42,7 +38,7 @@ namespace NadeoImporter
             }
             else
             {
-                Throw("Cannot find MaterialLib\nMake sure you are running this from the same folder as Nadeo Importer", 1);
+                Throw("Cannot find NadeoImporterMaterialLib.txt\nMake sure you are running this from root Trackmania folder with Nadeo Importer installed", 1);
                 return;
             }
 
@@ -156,7 +152,7 @@ namespace NadeoImporter
                     return;
 
                 case 2:
-                    MessageBox.Show(text, "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(text, "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
 
                 case 3:
@@ -261,7 +257,7 @@ namespace NadeoImporter
                 xml.WriteAttributeString("GhostMode", prop_b[1].ToString());
                 xml.WriteEndElement();
 
-                if (prop[6] != "" && prop[6] != "0")
+                if (prop[6] != "")
                 {
                     xml.WriteStartElement("PivotSnap");
                     xml.WriteAttributeString("Distance", prop[6]);
@@ -280,7 +276,7 @@ namespace NadeoImporter
             }
         }
 
-        public static string CreateStructure(string tmfolder, string subfolder, string file)
+        public static string CreateStructure(string tmfolder, string subfolder, string file, bool ignore_warning)
         {
             if (!File.Exists(file))
             {
@@ -289,55 +285,95 @@ namespace NadeoImporter
             }
 
             string path = tmfolder + "\\Work\\Items\\";
+
             if (!string.IsNullOrEmpty(subfolder))
             {
-                path = path + subfolder + "\\";
+                subfolder +=  "\\";
+                path += subfolder;
             }
 
             string name = Path.GetFileName(file);
             string destination = path + "Mesh\\";
             string copy = destination + name;
 
-            if (!(Directory.Exists(destination))) {
+            if (!Directory.Exists(destination)) {
                 Directory.CreateDirectory(destination);
             }
 
             if (File.Exists(copy))
             {
-                DialogResult result = MessageBox.Show("\"" + name +"\" already exists in \\Work\\Items\\" + subfolder + "\nOverwrite?", "Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                if (result == DialogResult.Yes)
+                if (ignore_warning)
                 {
                     File.Delete(copy);
-                    File.Copy(file, copy);
+                }
+                else
+                {
+                    
+                    DialogResult result = MessageBox.Show("\"" + name + "\" already exists in \\Work\\Items\\" + subfolder + "Mesh\nOverwrite?", "File conflict", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-                    return copy;
-                } 
-                else return null;
+                    if (result == DialogResult.Yes)
+                    {
+                        File.Delete(copy);
 
-            } else
-            {
-                File.Copy(file, copy);
-                return copy;
+                    } else return null;
+                }
+
             }
 
+            File.Copy(file, copy);
+            return copy;
 
- 
         }
 
-        public static string GetWorkFile(string tm_path, string fbx_path, bool itemmode)
+        public static void CleanUp(string workfile, string tm_path)
+        {
+            string oneup = Path.GetDirectoryName(workfile);
+            string name = Path.GetFileNameWithoutExtension(workfile);
+            string itemxml = Path.GetDirectoryName(oneup) + "\\" + name + ".Item.xml";
+            string meshparams = oneup + "\\" + name + ".MeshParams.xml";
+
+
+            if (File.Exists(workfile))
+            {
+                File.Delete(workfile);
+            }
+
+            if (File.Exists(itemxml))
+            {
+                File.Delete(itemxml);
+            }
+
+            if (File.Exists(meshparams))
+            {
+                File.Delete(meshparams);
+            }
+
+            while (Directory.GetFileSystemEntries(oneup).Length == 0) 
+            {
+                if (oneup != (tm_path + "\\Work\\Items"))           // Hard stop on Items folder
+                {
+                    Directory.Delete(oneup);
+                    oneup = Path.GetDirectoryName(oneup);
+                }
+                else return;
+            }
+
+        }
+
+        public static string GetWorkFileShort(string tm_path, string workfile, bool itemmode)
         {
             if (itemmode)
             {
-                string oneup = Path.GetDirectoryName(fbx_path);
-                string name = Path.GetFileNameWithoutExtension(fbx_path);
-                string workdir = Path.GetDirectoryName(oneup) + "\\" + name + ".Item.xml";
+                string oneup = Path.GetDirectoryName(workfile);
+                string name = Path.GetFileNameWithoutExtension(workfile);
+                string workpath = Path.GetDirectoryName(oneup) + "\\" + name + ".Item.xml";
 
-                return workdir.Replace(tm_path + "\\Work\\", "");
+                return workpath.Replace(tm_path + "\\Work\\", "");
                 
             } else
             {
-                return fbx_path.Replace(tm_path + "\\Work\\", "");
+                return workfile.Replace(tm_path + "\\Work\\", "");
             }
 
         }
@@ -347,11 +383,30 @@ namespace NadeoImporter
             return (File.Exists(path));
         }
 
+        public static string ImportedAlreadyExists(string tm_path, string subfold, string fbx_path, bool itemmode)
+        {
+            string itemname = Path.GetFileNameWithoutExtension(fbx_path);
+            string itempath = tm_path + "\\Items\\" + subfold;
+            string gbxname;
+
+            if (itemmode)
+            {
+                gbxname = itemname + ".Item.gbx";
+                if (File.Exists(itempath + "\\" + gbxname)) return gbxname;   
+            } else
+            {
+                gbxname = itemname + ".Mesh.gbx";
+                if (File.Exists(itempath + "\\Mesh\\" + gbxname)) return gbxname;
+            }
+
+            return null;
+        }
+
         public static void NadeoImporterRun(bool item_mode, string workfile, bool log)
         {
             if (!(File.Exists("NadeoImporter.exe")))
             {
-                Throw("Cannot find NadeoImporter.exe", 1);
+                Throw("Cannot find NadeoImporter.exe\nMake sure you are running this from root Trackmania folder with Nadeo Importer installed", 1);
                 return;
             }
 

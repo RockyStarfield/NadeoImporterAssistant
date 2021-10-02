@@ -14,7 +14,7 @@ namespace NadeoImporter
         {
             get 
             { 
-                return new string[] { tbMat.Text, comboBox1.Text, tbColor.Text };
+                return new string[] { tbMat.Text, cb_link.Text, tbColor.Text };
             }
         }
 
@@ -30,14 +30,14 @@ namespace NadeoImporter
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            comboBox1.DataSource = Nadeo.mat_lib;
+            cb_link.DataSource = Nadeo.mat_lib;
             button_cancel.DialogResult = DialogResult.Cancel;
 
             if (mat.Length > 0)
             {
                 button_add.Text = "Save";
                 tbMat.Text = mat[0];
-                comboBox1.Text = mat[1];
+                cb_link.Text = mat[1];
                 tbColor.Text = mat[2];
                 this.Text = "Edit Material";
             }
@@ -47,13 +47,22 @@ namespace NadeoImporter
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            if (tbMat.Text != "")
+
+            if (tbMat.Text == "")
             {
-                this.DialogResult = DialogResult.OK;
-            } else
-            {
-                Program.Throw("Material must have a name", 2);
+                Balloon.Show("Material must have a name", tbMat, 3000);
+                return;
             }
+
+            if (cb_link.Text == "")
+            {
+                Balloon.Show("Select material Link", cb_link, 3000);
+                return;
+            }
+
+
+            this.DialogResult = DialogResult.OK;
+            
         }
     }
 }
