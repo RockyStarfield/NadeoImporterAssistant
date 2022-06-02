@@ -3,6 +3,9 @@ Nadeo Importer Assistant
 by Rocky ★
 
 
+![Importer Assist](https://i.gyazo.com/8c8bae092339db1de7c8c86d52513802.jpg)
+
+
 	=== REQUIREMENTS ===
 
 	-	x64 .NET 3.1 or higher
