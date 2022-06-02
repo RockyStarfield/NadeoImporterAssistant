@@ -31,7 +31,7 @@ by Rocky ★
 
 		Select your local Trackmania folder in "Documents" 
 
-		Saved between sessions, You can forget about it after the initial set up
+		Saved between sessions; You can forget about it after the initial setup
 
 
 	-	"Sub-folder"
@@ -54,7 +54,7 @@ by Rocky ★
 
 	-	"Clean Import"
 
-		With this option checked no accompanying files and folders will be left in the Work folder 
+		With this option enabled no accompanying files and folders will be left in the Work folder 
 
 
 	-	"Materials"
